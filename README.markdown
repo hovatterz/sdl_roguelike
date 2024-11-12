@@ -7,6 +7,7 @@ Requirements:
 - C compiler
 - CMake version 3.31+
 - cppcheck
+- clang-format
 
 ## Building
 
@@ -22,4 +23,5 @@ make
 
 ```
 cppcheck --std=c99 src/
+clang-format -i src/*
 ```
