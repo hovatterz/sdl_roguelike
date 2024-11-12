@@ -6,6 +6,7 @@ Requirements:
 
 - C compiler
 - CMake version 3.31+
+- cppcheck
 
 ## Building
 
@@ -15,4 +16,10 @@ cd cmake
 cmake ..
 make
 ../bin/c_refresh
+```
+
+## Linting
+
+```
+cppcheck --std=c99 src/
 ```
