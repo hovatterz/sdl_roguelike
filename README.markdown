@@ -9,6 +9,7 @@ Requirements:
 - cppcheck
 - clang-format
 - SDL2
+- SDL2_image
 
 ## Building
 
