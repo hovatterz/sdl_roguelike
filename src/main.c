@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
       window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (!renderer) {
     fprintf(stderr, "Renderer could not be created: %s\n", SDL_GetError());
+    return 1;
   }
 
   bool quit = false;
