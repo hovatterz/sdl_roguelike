@@ -16,6 +16,10 @@ set(INCLUDE_DIRS ${INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/include/sds)
 # file(GLOB_RECURSE LIB_INC_FILES include/*/*.h)
 # install(FILES ${LIB_INC_FILES} DESTINATION include)
 
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+
 set(SOURCE_FILES src/main.c)
 add_executable(c_refresh ${SOURCE_FILES})
+target_link_libraries(c_refresh ${SDL2_LIBRARIES})
 # target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_LIB)

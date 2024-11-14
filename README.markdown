@@ -8,6 +8,7 @@ Requirements:
 - CMake version 3.31+
 - cppcheck
 - clang-format
+- SDL2
 
 ## Building
 
