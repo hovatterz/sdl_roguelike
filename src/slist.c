@@ -23,7 +23,7 @@ SList *SList_Create() {
   return list;
 }
 
-void SList_Add(SList *list, const void *data) {
+void SList_Add(SList *list, void *data) {
   SList_Node *current = NULL;
   if (list->head == NULL) {
     list->head = CreateNode(data);
@@ -36,7 +36,7 @@ void SList_Add(SList *list, const void *data) {
   }
 }
 
-void SList_Delete(SList *list, const void *data) {
+void SList_Delete(SList *list, void *data) {
   SList_Node *current = list->head;
   SList_Node *previous = current;
   while (current != NULL) {

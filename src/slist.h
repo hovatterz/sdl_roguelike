@@ -11,8 +11,8 @@ typedef struct slist {
 } SList;
 
 SList *SList_Create();
-void SList_Add(SList *list, const void *data);
-void SList_Delete(SList *list, const void *data);
+void SList_Add(SList *list, void *data);
+void SList_Delete(SList *list, void *data);
 void SList_Destroy(SList *list);
 
 #endif
