@@ -39,6 +39,28 @@ int testAdd() {
   return 0;
 }
 
+int testDelete() {
+  SList *list = SList_Create();
+  char *two = "Two";
+
+  SList_Add(list, "One");
+  SList_Add(list, two);
+  SList_Add(list, "Three");
+  SList_Delete(list, two);
+
+  SList_Node *current = list->head;
+  while (current != NULL) {
+    if (current->data == two) {
+      fprintf(stderr, "Node at 1 not removed\n");
+      return 1;
+    }
+
+    current = current->next;
+  }
+
+  return 0;
+}
+
 int testCount() {
   SList *list = SList_Create();
   SList_Add(list, "One");
@@ -72,6 +94,10 @@ int main(int argc, char *argv[]) {
       break;
 
     case 2:
+      return testDelete();
+      break;
+
+    case 3:
       return testCount();
       break;
     }
