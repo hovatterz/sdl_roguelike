@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cppcheck --std=c99 src/*
-clang-format -i --style=LLVM src/*
+cppcheck --std=c99 src/* test/*
+clang-format -i --style=LLVM src/* test/*

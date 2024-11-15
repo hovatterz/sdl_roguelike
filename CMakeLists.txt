@@ -23,3 +23,12 @@ set(SOURCE_FILES src/main.c
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY}
                                       ${SDL2_IMAGE_LIBRARIES})
+
+enable_testing()
+
+add_executable(slist_test test/slist_test.c)
+target_link_libraries(slist_test)
+
+add_test(NAME slist_test_create COMMAND slist_test 0)
+add_test(NAME slist_test_add COMMAND slist_test 1)
+add_test(NAME slist_test_count COMMAND slist_test 2)

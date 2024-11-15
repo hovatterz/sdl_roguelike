@@ -2,7 +2,7 @@
 
 #include "slist.h"
 
-SList_Node *CreateNode(void *data) {
+SList_Node *createNode(void *data) {
   SList_Node *node = malloc(sizeof(SList_Node));
   if (!node) {
     return NULL;
@@ -26,13 +26,13 @@ SList *SList_Create() {
 void SList_Add(SList *list, void *data) {
   SList_Node *current = NULL;
   if (list->head == NULL) {
-    list->head = CreateNode(data);
+    list->head = createNode(data);
   } else {
     current = list->head;
     while (current->next != NULL) {
       current = current->next;
     }
-    current->next = CreateNode(data);
+    current->next = createNode(data);
   }
 }
 
@@ -50,6 +50,17 @@ void SList_Delete(SList *list, void *data) {
     previous = current;
     current = current->next;
   }
+}
+
+unsigned int SList_Count(SList *list) {
+  unsigned int count = 0;
+  SList_Node *current = list->head;
+  while (current != NULL) {
+    count++;
+    current = current->next;
+  }
+
+  return count;
 }
 
 void SList_Free(SList *list) {
