@@ -13,16 +13,26 @@ Requirements:
 
 ## Building
 
+Debug
+
 ```
-mkdir -p build
-cd build
-cmake ..
-make
-../bin/c_refresh
+./build.sh
+```
+
+Release
+
+```
+BUILD_TYPE=Release ./build.sh
 ```
 
 ## Linting
 
 ```
 ./lint.sh
+```
+
+## Running
+
+```
+bin/roguelike
 ```
