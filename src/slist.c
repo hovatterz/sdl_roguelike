@@ -52,7 +52,7 @@ void SList_Delete(SList *list, void *data) {
   }
 }
 
-void SList_Destroy(SList *list) {
+void SList_Free(SList *list) {
   SList_Node *current = list->head;
   SList_Node *next = current;
   while (current != NULL) {

@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include "dungeon.h"
 #include "slist.h"
 
 const int windowWidth = 800, windowHeight = 600;
@@ -72,6 +73,10 @@ int main(int argc, char **argv) {
   SDL_Texture *dungeonTiles = loadTexture(renderer, "./assets/dungeon.png");
   SList_Add(textures, dungeonTiles);
 
+  // Generate the dungeon
+  RL_Dungeon *dungeon = RL_Dungeon_Create(64);
+  RL_Dungeon_Print(dungeon);
+
   bool quit = false;
   SDL_Event evt;
   while (!quit) {
@@ -89,6 +94,9 @@ int main(int argc, char **argv) {
     SDL_RenderPresent(renderer);
   }
 
+  // Free dungeon
+  RL_Dungeon_Free(dungeon);
+
   // Free textures
   SList_Node *current = textures->head;
   while (current != NULL) {
@@ -97,7 +105,7 @@ int main(int argc, char **argv) {
 
     current = current->next;
   }
-  SList_Destroy(textures);
+  SList_Free(textures);
 
   return 0;
 }

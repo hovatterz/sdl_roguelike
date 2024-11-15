@@ -13,6 +13,6 @@ typedef struct slist {
 SList *SList_Create();
 void SList_Add(SList *list, void *data);
 void SList_Delete(SList *list, void *data);
-void SList_Destroy(SList *list);
+void SList_Free(SList *list);
 
 #endif
