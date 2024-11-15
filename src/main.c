@@ -39,8 +39,18 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // Initialize .png image loading
+  int imgFlags = IMG_INIT_PNG;
+  if (!(IMG_Init(imgFlags) & imgFlags)) {
+    fprintf(stderr, "Unable to init SDL_image: %s\n", IMG_GetError());
+    SDL_Quit();
+    return 1;
+  }
+
+  // Ensure we free SDL and IMG
   atexit(cleanup);
 
+  // Create a game window
   SDL_Window *window = SDL_CreateWindow("Roguelike", SDL_WINDOWPOS_CENTERED,
                                         SDL_WINDOWPOS_CENTERED, windowWidth,
                                         windowHeight, SDL_WINDOW_SHOWN);
@@ -49,6 +59,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  // Create a hardware accelerated renderer
   SDL_Renderer *renderer = SDL_CreateRenderer(
       window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (!renderer) {
@@ -56,12 +67,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  int imgFlags = IMG_INIT_PNG;
-  if (!(IMG_Init(imgFlags) & imgFlags)) {
-    fprintf(stderr, "Unable to init SDL_image: %s\n", IMG_GetError());
-    return 1;
-  }
-
+  // Load game textures
   SList *textures = SList_Create();
   SDL_Texture *dungeonTiles = loadTexture(renderer, "./assets/dungeon.png");
   SList_Add(textures, dungeonTiles);
@@ -69,12 +75,14 @@ int main(int argc, char **argv) {
   bool quit = false;
   SDL_Event evt;
   while (!quit) {
+    // Event loop
     while (SDL_PollEvent(&evt) != 0) {
       if (evt.type == SDL_QUIT) {
         quit = true;
       }
     }
 
+    // Render loop
     SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, dungeonTiles, NULL, NULL);
@@ -89,7 +97,6 @@ int main(int argc, char **argv) {
 
     current = current->next;
   }
-
   SList_Destroy(textures);
 
   return 0;
