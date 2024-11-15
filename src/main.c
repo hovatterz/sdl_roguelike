@@ -1,7 +1,10 @@
-#include <SDL.h>
-#include <SDL_image.h>
 #include <stdbool.h>
 #include <stdio.h>
+
+#include <SDL.h>
+#include <SDL_image.h>
+
+#include "slist.h"
 
 const int windowWidth = 800, windowHeight = 600;
 
@@ -59,7 +62,9 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  SList *textures = SList_Create();
   SDL_Texture *dungeonTiles = loadTexture(renderer, "./assets/dungeon.png");
+  SList_Add(textures, dungeonTiles);
 
   bool quit = false;
   SDL_Event evt;
@@ -76,7 +81,16 @@ int main(int argc, char **argv) {
     SDL_RenderPresent(renderer);
   }
 
-  SDL_DestroyTexture(dungeonTiles);
+  // Free textures
+  SList_Node *current = textures->head;
+  while (current != NULL) {
+    SDL_Texture *texture = current->data;
+    SDL_DestroyTexture(texture);
+
+    current = current->next;
+  }
+
+  SList_Destroy(textures);
 
   return 0;
 }
