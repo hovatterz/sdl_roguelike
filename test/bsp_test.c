@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "../src/bsp.c"
 #include "../src/bsp.h"
 #include "helpers.h"
@@ -44,33 +42,8 @@ int testSplitNodeVertical() {
   return 0;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc > 1) {
-    int choice = 0;
-
-    if (sscanf(argv[1], "%d", &choice) != 1) {
-      fprintf(stderr, "Could not parse test selection as a number!\n");
-      return -1;
-    }
-
-    switch (choice) {
-    case 0:
-      return testCreate();
-      break;
-
-    case 1:
-      return testSplitNodeHorizontal();
-      break;
-
-    case 2:
-      return testSplitNodeVertical();
-      break;
-    }
-
-    fprintf(stderr, "Invalid test selection: %d!\n", choice);
-    return -1;
-  }
-
-  fprintf(stderr, "No test selected!\n");
-  return -1;
-}
+TEST_START()
+TEST_CASE(0, testCreate)
+TEST_CASE(1, testSplitNodeHorizontal)
+TEST_CASE(2, testSplitNodeVertical)
+TEST_END()
