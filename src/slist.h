@@ -16,4 +16,11 @@ void SList_Delete(SList *list, void *data);
 unsigned int SList_Count(SList *list);
 void SList_Free(SList *list);
 
+#define SList_ForEach(list, func)                                              \
+  SList_Node *current = list->head;                                            \
+  while (current != NULL) {                                                    \
+    func;                                                                      \
+    current = current->next;                                                   \
+  }
+
 #endif

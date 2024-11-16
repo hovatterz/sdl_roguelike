@@ -108,13 +108,7 @@ int main(int argc, char **argv) {
   RL_Dungeon_Free(dungeon);
 
   // Free textures
-  SList_Node *current = textures->head;
-  while (current != NULL) {
-    SDL_Texture *texture = current->data;
-    SDL_DestroyTexture(texture);
-
-    current = current->next;
-  }
+  SList_ForEach(textures, SDL_DestroyTexture(current->data));
   SList_Free(textures);
 
   return 0;
