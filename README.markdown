@@ -11,6 +11,12 @@ Requirements:
 - SDL2
 - SDL2_image
 
+For a Mac with Homebrew installed these dependencies can be installed with:
+
+```
+brew install gcc sdl2 sdl2_image cmake cppcheck clang-format
+```
+
 ## Building
 
 Debug
