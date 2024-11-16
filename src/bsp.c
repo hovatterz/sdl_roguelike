@@ -2,12 +2,13 @@
 
 #include "bsp.h"
 
-BSP_Node *BSP_Node_create(int x, int y, int w, int h) {
+BSP_Node *BSP_Node_create(BSP_Node *parent, int x, int y, int w, int h) {
   BSP_Node *node = malloc(sizeof(BSP_Node));
   if (!node) {
     return NULL;
   }
 
+  node->parent = parent;
   node->x = x;
   node->y = y;
   node->w = w;
@@ -21,8 +22,8 @@ void BSP_Node_SplitHorizontal(BSP_Node *node, int y) {
     return;
   }
 
-  node->a = BSP_Node_create(node->x, node->y, node->w, y);
-  node->b = BSP_Node_create(node->x, y, node->w, node->h - y);
+  node->a = BSP_Node_create(node, node->x, node->y, node->w, y);
+  node->b = BSP_Node_create(node, node->x, y, node->w, node->h - y);
 }
 
 void BSP_Node_SplitVertical(BSP_Node *node, int x) {
@@ -30,8 +31,8 @@ void BSP_Node_SplitVertical(BSP_Node *node, int x) {
     return;
   }
 
-  node->a = BSP_Node_create(node->x, node->y, x, node->h);
-  node->b = BSP_Node_create(x, node->y, node->w - x, node->h);
+  node->a = BSP_Node_create(node, node->x, node->y, x, node->h);
+  node->b = BSP_Node_create(node, x, node->y, node->w - x, node->h);
 }
 
 void BSP_Node_Free(BSP_Node *node) {
@@ -52,7 +53,7 @@ BSP_Tree *BSP_Tree_Create(int x, int y, int w, int h) {
     return NULL;
   }
 
-  tree->head = BSP_Node_create(x, y, w, h);
+  tree->head = BSP_Node_create(NULL, x, y, w, h);
 
   return tree;
 }
