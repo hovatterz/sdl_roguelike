@@ -32,4 +32,5 @@ target_link_libraries(slist_test)
 
 add_test(NAME slist_test_create COMMAND slist_test 0)
 add_test(NAME slist_test_add COMMAND slist_test 1)
-add_test(NAME slist_test_count COMMAND slist_test 2)
+add_test(NAME slist_test_delete COMMAND slist_test 2)
+add_test(NAME slist_test_count COMMAND slist_test 3)

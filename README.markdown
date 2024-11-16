@@ -31,6 +31,12 @@ BUILD_TYPE=Release ./build.sh
 ./lint.sh
 ```
 
+## Tests
+
+```
+./run_tests.sh
+```
+
 ## Running
 
 ```

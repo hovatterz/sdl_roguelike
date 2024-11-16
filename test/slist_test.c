@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "../src/slist.c"
 #include "../src/slist.h"
@@ -19,19 +20,19 @@ int testAdd() {
   SList_Add(list, "Three");
 
   SList_Node *node = list->head;
-  if (!node || node->data != "One") {
+  if (!node || strcmp(node->data, "One") != 0) {
     fprintf(stderr, "Node at 0 should be 'One'\n");
     return 1;
   }
 
   node = node->next;
-  if (!node || node->data != "Two") {
+  if (!node || strcmp(node->data, "Two") != 0) {
     fprintf(stderr, "Node at 1 should be 'Two'\n");
     return 1;
   }
 
   node = node->next;
-  if (!node || node->data != "Three") {
+  if (!node || strcmp(node->data, "Three") != 0) {
     fprintf(stderr, "Node at 2 should be 'Three'\n");
     return 1;
   }
