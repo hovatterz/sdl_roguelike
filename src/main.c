@@ -6,6 +6,7 @@
 
 #include "dungeon.h"
 #include "slist.h"
+#include "tile.h"
 
 const int windowWidth = 800, windowHeight = 600;
 
@@ -90,7 +91,16 @@ int main(int argc, char **argv) {
     // Render loop
     SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, dungeonTiles, NULL, NULL);
+    for (int i = 0; i < (int)ceilf((float)windowWidth / 16); i++) {
+      for (int j = 0; j < (int)ceilf((float)windowHeight / 16); j++) {
+        if (i >= 0 && i < dungeon->size && j >= 0 && j < dungeon->size) {
+          RL_Tile *tile = RL_Dungeon_TileAt(dungeon, i, j);
+          SDL_Rect dst = {i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE};
+          SDL_RenderCopy(renderer, dungeonTiles, &tile->src, &dst);
+        }
+      }
+    }
+
     SDL_RenderPresent(renderer);
   }
 
