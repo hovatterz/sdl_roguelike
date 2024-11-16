@@ -18,10 +18,9 @@ include_directories(
   ${SDL2_INCLUDE_DIR}
   ${SDL2_IMAGE_INCLUDE_DIRS})
 
-set(SOURCE_FILES src/main.c
-                 src/dungeon.c
-                 src/slist.c)
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} src/main.c
+                               src/dungeon.c
+                               src/slist.c)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY}
                                       ${SDL2_IMAGE_LIBRARIES})
 
