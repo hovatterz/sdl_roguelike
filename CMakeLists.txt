@@ -18,19 +18,27 @@ include_directories(
   ${SDL2_INCLUDE_DIR}
   ${SDL2_IMAGE_INCLUDE_DIRS})
 
-add_executable(${PROJECT_NAME} src/main.c
-                               src/dungeon.c
-                               src/slist.c
-                               src/tile.c)
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY}
-                                      ${SDL2_IMAGE_LIBRARIES})
+add_executable(${PROJECT_NAME}
+  src/main.c
+  src/bsp.c
+  src/dungeon.c
+  src/slist.c
+  src/tile.c)
+target_link_libraries(${PROJECT_NAME}
+  ${SDL2_LIBRARY}
+  ${SDL2_IMAGE_LIBRARIES})
 
 enable_testing()
 
 add_executable(slist_test test/slist_test.c)
 target_link_libraries(slist_test)
 
-add_test(NAME slist_test_create COMMAND slist_test 0)
-add_test(NAME slist_test_add COMMAND slist_test 1)
-add_test(NAME slist_test_delete COMMAND slist_test 2)
-add_test(NAME slist_test_count COMMAND slist_test 3)
+add_executable(bsp_test test/bsp_test.c)
+target_link_libraries(bsp_test)
+
+add_test(NAME slist_create COMMAND slist_test 0)
+add_test(NAME slist_add COMMAND slist_test 1)
+add_test(NAME slist_delete COMMAND slist_test 2)
+add_test(NAME slist_count COMMAND slist_test 3)
+add_test(NAME bsp_create COMMAND bsp_test 0)
+add_test(NAME bsp_split_horizontal COMMAND bsp_test 1)

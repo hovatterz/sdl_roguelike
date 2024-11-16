@@ -3,12 +3,11 @@
 
 #include "../src/slist.c"
 #include "../src/slist.h"
+#include "helpers.h"
 
 int testCreate() {
   SList *list = SList_Create();
-  if (!list) {
-    return 1;
-  }
+  ASSERT(list, "Failed to create list");
 
   return 0;
 }
@@ -20,22 +19,14 @@ int testAdd() {
   SList_Add(list, "Three");
 
   SList_Node *node = list->head;
-  if (!node || strcmp(node->data, "One") != 0) {
-    fprintf(stderr, "Node at 0 should be 'One'\n");
-    return 1;
-  }
+  ASSERT(node && strcmp(node->data, "One") == 0, "Node at 0 should be 'One'\n");
 
   node = node->next;
-  if (!node || strcmp(node->data, "Two") != 0) {
-    fprintf(stderr, "Node at 1 should be 'Two'\n");
-    return 1;
-  }
+  ASSERT(node && strcmp(node->data, "Two") == 0, "Node at 0 should be 'Two'\n");
 
   node = node->next;
-  if (!node || strcmp(node->data, "Three") != 0) {
-    fprintf(stderr, "Node at 2 should be 'Three'\n");
-    return 1;
-  }
+  ASSERT(node && strcmp(node->data, "Three") == 0,
+         "Node at 0 should be 'Three'\n");
 
   return 0;
 }
@@ -51,11 +42,7 @@ int testDelete() {
 
   SList_Node *current = list->head;
   while (current != NULL) {
-    if (current->data == two) {
-      fprintf(stderr, "Node at 1 not removed\n");
-      return 1;
-    }
-
+    ASSERT(current->data != two, "Node at 1 not removed");
     current = current->next;
   }
 
@@ -68,10 +55,7 @@ int testCount() {
   SList_Add(list, "Two");
   SList_Add(list, "Three");
 
-  if (SList_Count(list) != 3) {
-    fprintf(stderr, "Count should be equal to 3\n");
-    return 1;
-  }
+  ASSERT(SList_Count(list) == 3, "Count should be equal to 3");
 
   return 0;
 }
